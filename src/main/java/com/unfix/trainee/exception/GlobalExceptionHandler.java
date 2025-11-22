@@ -37,4 +37,12 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(status).body(body);
     }
+    @ExceptionHandler(PrExistsException.class)
+    public ResponseEntity<ErrorResponse> handlePrExists(PrExistsException ex) {
+        ErrorResponse body = new ErrorResponse(
+                new ErrorResponse.ErrorBody(ErrorCode.PR_EXISTS, ex.getMessage())
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+    }
+
 }
