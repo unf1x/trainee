@@ -29,17 +29,14 @@ public class TeamServiceImpl implements TeamService {
     public TeamDto createTeam(TeamDto request) {
         String teamName = request.team_name();
 
-        // Если команда уже существует - 400 TEAM_EXISTS (по OpenAPI)
         if (teamRepository.existsById(teamName)) {
             throw new TeamExistsException("team_name already exists");
         }
 
-        // Создаём новую команду
         TeamEntity team = new TeamEntity();
         team.setName(teamName);
         teamRepository.save(team);
 
-        // Создаём/обновляем пользователей
         for (TeamMemberDto memberDto : request.members()) {
             UserEntity user = userRepository.findById(memberDto.user_id())
                     .orElseGet(UserEntity::new);
@@ -52,7 +49,6 @@ public class TeamServiceImpl implements TeamService {
             userRepository.save(user);
         }
 
-        // Загружаем членов команды обратно из БД и маппим в DTO
         List<UserEntity> members = userRepository.findByTeam_Name(teamName);
         return toTeamDto(team, members);
     }
