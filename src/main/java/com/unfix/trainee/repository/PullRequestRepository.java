@@ -9,12 +9,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PullRequestRepository extends JpaRepository<PullRequestEntity, String> {
-
-    @Query("""
-           select pr
-           from PullRequestEntity pr
-           join pr.reviewers r
-           where r.id = :userId
-           """)
-    List<PullRequestEntity> findByReviewerId(@Param("userId") String userId);
+    List<PullRequestEntity> findByReviewers_Id(String reviewerId);
 }

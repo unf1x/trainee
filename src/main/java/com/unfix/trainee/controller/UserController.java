@@ -1,6 +1,7 @@
 package com.unfix.trainee.controller;
 
 import com.unfix.trainee.dto.UserDto;
+import com.unfix.trainee.dto.UserReviewsDto;
 import com.unfix.trainee.dto.UserSetIsActiveRequest;
 import com.unfix.trainee.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,9 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseWrapper(user));
+    }
+    @GetMapping("/users/getReview")
+    public ResponseEntity<UserReviewsDto> getReview(@RequestParam("user_id") String userId) {
+        return ResponseEntity.ok(userService.getReviews(userId));
     }
 }
