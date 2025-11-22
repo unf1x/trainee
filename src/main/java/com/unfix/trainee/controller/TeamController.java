@@ -17,7 +17,6 @@ public class TeamController {
     @PostMapping("/team/add")
     public ResponseEntity<?> addTeam(@RequestBody TeamDto request) {
         TeamDto team = teamService.createTeam(request);
-        // OpenAPI требует обёртку { "team": { ... } }
         record ResponseWrapper(TeamDto team) {}
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ResponseWrapper(team));
