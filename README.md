@@ -5,6 +5,8 @@
 Тестовое задание Backend Trainee (Fall 2025).
 
 ---
+## Стек технологий
+Java 17; Spring Boot 3 (Web, Data JPA); PostgreSQL 16; Flyway; Docker; Maven; K6; Postman; Lombok 
 
 ## Запуск через Docker
 
