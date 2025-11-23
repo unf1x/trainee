@@ -1,3 +1,49 @@
+# PR Reviewer Assignment Service
+
+Сервис для автоматического назначения ревьюверов на Pull Request'ы, управления командами и пользователями, переназначения ревьюверов и массовой деактивации.
+
+Тестовое задание Backend Trainee (Fall 2025).
+
+---
+
+## Запуск через Docker
+
+```
+docker-compose up --build
+```
+
+Сервис будет доступен на:
+
+```
+http://localhost:8080
+```
+
+PostgreSQL поднимается автоматически, миграции Flyway применяются при старте.
+
+## Эндпоинты
+
+Основные:
+
+- `POST /team/add`
+- `GET /team/get`
+- `POST /users/setIsActive`
+- `GET /users/getReview`
+- `POST /pullRequest/create`
+- `POST /pullRequest/merge`
+- `POST /pullRequest/reassign`
+
+Дополнительные:
+
+- `GET /stats/assignments/byUser`
+- `POST /users/bulkDeactivate`
+
+## Дополнительный функционал
+### Статистика
+Эндпоинт `/stats/assignments/byUser` возвращает количество назначений ревьюверов для каждого пользователя.
+
+### Массовая деактивация
+`POST /users/bulkDeactivate` деактивирует всех пользователей команды и безопасно переназначает открытые PR.
+
 # Нагрузочное тестирование `/users/bulkDeactivate`
 
 **Профиль нагрузки:** до 10 VU, ~40 секунд  
