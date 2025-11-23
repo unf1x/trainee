@@ -130,10 +130,12 @@ public class PullRequestServiceImpl implements PullRequestService {
         for (UserEntity u : teamMembers) {
             if (u.isActive()
                     && !u.getId().equals(oldReviewer.getId())
+                    && !u.getId().equals(pr.getAuthor().getId())
                     && !pr.getReviewers().contains(u)) {
                 candidates.add(u);
             }
         }
+
 
         if (candidates.isEmpty()) {
             throw new NoCandidateException("no active replacement candidate in team");
